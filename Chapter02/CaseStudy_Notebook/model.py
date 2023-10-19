@@ -60,7 +60,7 @@ class NoteBook:
         self.notes[note.id] = note
         return note.id
 
-    def modify_note(self, note_id: uuid.UUID, memo: str) -> Note:
+    def modify_memo(self, note_id: uuid.UUID, memo: str) -> Note:
         """
         Modify an existing note in the notebook.
 
@@ -74,12 +74,14 @@ class NoteBook:
         Examples:
             >>> notebook = NoteBook()
             >>> note_id = notebook.new_note("Sample memo", ["tag1", "tag2"])
-            >>> modified_note = notebook.modify_note(note_id, "Updated memo")
+            >>> modified_note = notebook.modify_memo(note_id, "Updated memo")
             >>> modified_note.memo
             'Updated memo'
         """
-        self.notes[note_id].memo = memo
-        return self.notes[note_id]
+        note = self.notes.get(note_id)
+        if note:
+            note.memo = memo
+        return note
 
     def modify_tags(self, note_id: uuid.UUID, tags: list) -> Note:
         """
@@ -99,10 +101,12 @@ class NoteBook:
             >>> modified_note.tags
             ['newtag']
         """
-        self.notes[note_id].tags = tags
-        return self.notes[note_id]
+        note = self.notes.get(note_id)
+        if note:
+            note.tags = tags
+        return note
 
-    def search(self, to_fileter: str) -> list:
+    def search(self, to_fileter: str) -> dict:
         """
         Search for notes in the notebook that match a target string.
 
@@ -120,4 +124,4 @@ class NoteBook:
             >>> len(result)
             1
         """
-        return [note for note in self.notes.values() if note.match(to_fileter)]
+        return {k: v for k, v in self.notes.items() if v.match(to_fileter)}
