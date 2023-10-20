@@ -41,6 +41,26 @@ class Supplier(Contact):
         )
 
 
+class Friend(Contact):
+    def __init__(self, name, email, phone):
+        """
+        A class representing a friend contact.
+
+        This class inherits from the Contact class and adds a phone number attribute.
+
+        Example:
+        >>> friend = Friend("John", "john@example.com", "123-456-7890")
+        >>> friend.name
+        'John'
+        >>> friend.email
+        'john@example.com'
+        >>> friend.phone
+        '123-456-7890'
+        """
+        super().__init__(name, email)
+        self.phone = phone
+
+
 class LongNameDict(dict):
     def longest_key(self):
         """
