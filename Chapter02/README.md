@@ -12,6 +12,25 @@ This repository contains a case study for Chapter 2 of [Python-3-Object-Oriented
   - [Acknowledgements](#acknowledgements)
 
 ## Introduction
+```mermaid
+classDiagram
+class Note {
+    +String memo
+    +Datetime creation_datetime
+    +List~String~ tags
+    +match(String search_filter) Boolean
+}
+class NoteBook {
+    +List~Note~ notes
+    +search(String filter) List
+    +new_note(memo, tags='')
+    +modify_memo(note_id, memo)
+    +modify_tags(note_id, tags)
+}
+NoteBook "1" -- "*" Note
+CommandOption -- NoteBook
+Menu -- NoteBook
+```
 
 ## Project Structure
 
