@@ -39,3 +39,21 @@ class Supplier(Contact):
         print(
             f"If this were a real system we would send '{order}' order to '{self.name}'"
         )
+
+
+class LongNameDict(dict):
+    def longest_key(self):
+        """
+        >>> longkeys = LongNameDict()
+        >>> longkeys['hello'] = 1
+        >>> longkeys['longest yet'] = 5
+        >>> longkeys['hello2'] = 'world'
+        >>> longkeys.longest_key()
+        'longest yet'
+        """
+        longest_key = ""
+        for key in self:
+            if len(key) > len(longest_key):
+                longest_key = key
+
+        return longest_key
