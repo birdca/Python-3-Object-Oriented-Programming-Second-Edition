@@ -77,3 +77,16 @@ class LongNameDict(dict):
                 longest_key = key
 
         return longest_key
+
+
+class MailSender:
+    def send_mail(self, context):
+        print(f"Send '{context}' to '{self.email}'")
+
+
+class EmailableContact(Contact, MailSender):
+    """
+    >>> e = EmailableContact("John Smith", "jsmith@example.net")
+    >>> e.send_mail("Hello, test e-mail here")
+    Send 'Hello, test e-mail here' to 'jsmith@example.net'
+    """
